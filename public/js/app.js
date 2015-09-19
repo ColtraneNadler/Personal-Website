@@ -45,11 +45,12 @@ $(function() {
 			} else {
 				emailAlert($('form'), 'danger', 'something broked.')
 			}
+			
+			name.val('');
+			email.val('');
+			subject.val('');
+			message.val('');
 		})
-		name.val('');
-		email.val('');
-		subject.val('');
-		message.val('');
 
 	})
 })
