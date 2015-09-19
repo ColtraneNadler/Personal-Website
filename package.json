@@ -1,0 +1,19 @@
+{
+  "name": "PersonalWebsite",
+  "version": "1.0.0",
+  "description": "My Personal Website",
+  "main": "server.js",
+  "dependencies": {
+    "body-parser": "^1.14.0",
+    "morgan": "^1.6.1",
+    "express": "^4.13.3",
+    "nodemailer": "^1.4.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "author": "Coltrane Nadler",
+  "license": "ISC"
+}
