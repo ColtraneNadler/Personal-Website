@@ -13,9 +13,32 @@ function emailAlert(elem, type, msg) {
 	}, 3000)
 }
 
+  var ua = navigator.userAgent,
+    isMobileWebkit = /WebKit/.test(ua) && /Mobile/.test(ua);
+
+  if (isMobileWebkit) {
+    $('html').addClass('mobile');
+  }
+
+
 $(function() {
 	var header = $('.header-overlay');
-	$(window).stellar()
+	var iScrollInstance;
+
+	if (isMobileWebkit) {
+		iScrollInstance = new iScroll('wrapper');
+
+		$('#scroller').stellar({
+			scrollProperty: 'transform',
+			positionProperty: 'transform',
+			horizontalScrolling: false,
+		});
+	} else {
+	  	$.stellar({
+	    	horizontalScrolling: false,
+	  	});
+	}
+
 	$(window).scroll(function() {
 		if($(window).scrollTop() > 500) {
 			header.css('opacity', '0')
@@ -45,7 +68,7 @@ $(function() {
 			} else {
 				emailAlert($('form'), 'danger', 'something broked.')
 			}
-			
+
 			name.val('');
 			email.val('');
 			subject.val('');

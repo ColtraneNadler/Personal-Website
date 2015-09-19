@@ -21,7 +21,6 @@ var transporter = nodemailer.createTransport({
 });
 
 app.get('/', function(req, res) {
-	console.log(req._remoteAddress);
 	res.sendFile(__dirname + '/index.html')
 })
 
@@ -53,6 +52,6 @@ app.post('/', function(req, res) {
 	}
 })
 
-app.listen(3000, function() {
+app.listen(conf.db, function() {
 	console.log('Running')
 })
