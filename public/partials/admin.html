@@ -1,0 +1,48 @@
+<br>
+<div class="admin">
+	<div class="container">
+		<div class="alert alert-success" ng-show="successpost">
+			<b>Successfull</b> post created!
+		</div>
+		<div class="panel panel-default" ng-show="auth">
+			<div class="panel-heading">
+				<h4 style="margin: 5px">New Post</h4>
+			</div>
+			<div class="panel-body">
+				<form id="newpost" ng-submit="newpost()">
+					<div class="form-group">
+						<label>Title</label>
+						<input class="form-control" type="text" placeholder="Title" ng-model="title" required>
+					</div>
+					<div class="form-group">
+						<label>Body</label>
+						<textarea class="form-control" type="text" placeholder="Random shit" rows="4" style="resize: vertical" id="body" ng-model="body" required></textarea>
+					</div>
+					<div class="form-group">
+						<label>Preview</label>
+						<div class="panel panel-default">
+							<div class="panel-body" id="preview" bind-html-unsafe="preview()"></div>
+						</div>
+					</div>
+					<button type="submit" class="btn btn-default">Post</button>
+				</form>
+			</div>
+		</div>
+
+		<div class="alert alert-warning" ng-if="alert">
+			<b>Warning</b> Incorrect login credentials!
+		</div>
+		<br>
+		<form ng-if="!auth" ng-submit="authenticate()" id="authforum">
+			<div class="form-group">
+				<label>Username</label>
+				<input type="text" class="form-control" id="username" placeholder="Username" required>
+			</div>
+			<div class="form-group">
+				<label>Password</label>
+				<input type="password" class="form-control" id="password" placeholder="Password" required>
+			</div>
+			<button type="submit" class="btn btn-default">Login</button>
+		</form>
+	</div>
+</div>

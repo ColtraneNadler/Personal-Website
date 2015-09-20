@@ -1,0 +1,23 @@
+<br>
+<div class="blog-post">
+	<div class="container">
+		<div class="panel panel-default">
+			<div class="panel panel-body">
+				<h3>
+					{{post.title}}
+					<button class="btn btn-danger" ng-click="removepost()" ng-if="admin">Remove</button>
+					<button class="btn btn-warning" ng-click="editpost()" ng-if="admin">Edit</button>
+					<br>
+					<small>By <span class="author">Coltrane Nadler</span> on <span ng-bind="post.date"></span></small>
+				</h3>
+				<p bind-html-unsafe="post.body" ng-if="!edit"></p>
+				<textarea class="form-control" ng-show="edit" ng-model="editor"></textarea>
+				<br>
+				<div class="panel panel-default" ng-show="edit">
+					<div class="panel-body" bind-html-unsafe="updateprev()"></div>
+				</div>
+				<button class="btn btn-default" ng-click="updatepost()" ng-if="edit">Update</button>
+			</div>
+		</div>
+	</div>
+</div>
