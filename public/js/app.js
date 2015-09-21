@@ -74,12 +74,14 @@ coltrane.controller('home', function($scope, $http, $timeout) {
 					$scope.alert_success = true;
 					$scope.email_alert = true;
 					$timeout(function() {
+						$scope.alert_success = false;
 						$scope.email_alert = false;
 					}, 8000)
 				} else {
 					$scope.alert_warning = true;
 					$scope.email_alert = true;
 					$timeout(function() {
+						$scope.alert_warning = true;
 						$scope.email_alert = false;
 					}, 8000)
 				}
@@ -128,9 +130,8 @@ coltrane.controller('blogpag', function($scope, $http, $routeParams) {
 })
 
 coltrane.controller('blogpost', function($scope, $http, $routeParams, $rootScope, $location) {
-	console.log($location.path())
 	$scope.post = {};
-	$scope.admin = true;
+	$scope.admin = $rootScope.auth;
 	$scope.edit = false;
 	$scope.preivew = '';
 	$scope.editor = '';
@@ -155,7 +156,7 @@ coltrane.controller('blogpost', function($scope, $http, $routeParams, $rootScope
 	}
 
 	$scope.removepost = function() {
-		$http.get('/api/post/del?post=' + $routeParams['post']).
+		$http.get('/api/post/del?post=' + $routeParams['post'] + '&id=' + $rootScope.authId).
 			then(function(data) {
 				console.log(data)
 				if(data.data.success === true) {
@@ -163,6 +164,22 @@ coltrane.controller('blogpost', function($scope, $http, $routeParams, $rootScope
 				}
 			}, function(err) {
 				if(err) return console.log(err)
+			})
+	}
+
+	$scope.updatepost = function() {
+		var obj = {
+			raw: $scope.editor,
+			body: marked($scope.editor),
+			date: $routeParams['post'],
+			id: $rootScope.authId
+		}
+
+		$http.post('/api/post/update', obj).
+			then(function(data) {
+				console.log(data)
+			}, function(err) {
+				return console.log(err);
 			})
 	}
 
@@ -200,7 +217,6 @@ coltrane.controller('admin', function($scope, $http, $rootScope) {
 
 		$http.post('/api/newpost', obj).
 			then(function(data) {
-				console.log(data)
 				$scope.successpost = true;
 				$scope.title = '';
 				$scope.body = '';
@@ -223,7 +239,7 @@ coltrane.controller('admin', function($scope, $http, $rootScope) {
 			then(function(data) {
 				if(data.data.success === true) {
 					$rootScope.auth = true;
-					$rootScope.authId = data.id;
+					$rootScope.authId = data.data.id;
 					$scope.auth = true;
 					// authmsg('success', 'logged in successfully!')
 					$scope.alert = false;

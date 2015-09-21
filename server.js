@@ -87,22 +87,26 @@ app.get('/api/post', function(req, res) {
 })
 
 app.get('/api/post/del', function(req, res) {
-	posts.findOne({'date': parseInt(req.query.post)}, function(err, post) {
-		if(err) return console.log(err);
-		if(post) {
-			posts.remove({'date': parseInt(req.query.post)}, function(err, info) {
-				if(err) return console.log(err);
-				if(info) {
-					res.json({success: true})
-				} else {
-					res.json({success: false})
-				}
+	if(req.query.id === conf.id) {
+		posts.findOne({'date': parseInt(req.query.post)}, function(err, post) {
+			if(err) return console.log(err);
+			if(post) {
+				posts.remove({'date': parseInt(req.query.post)}, function(err, info) {
+					if(err) return console.log(err);
+					if(info) {
+						res.json({success: true})
+					} else {
+						res.json({success: false})
+					}
 
-			})
-		} else {
-			res.json({success: false})
-		}
-	})
+				})
+			} else {
+				res.json({success: false})
+			}
+		})
+	} else {
+		res.json('SAY WHAT?')
+	}
 })
 
 app.get('*', function(req, res) {
@@ -146,6 +150,22 @@ app.post('/api/newpost', function(req, res) {
 		console.log(info)
 		res.json('successful')
 	})
+})
+
+app.post('/api/post/update', function(req, res) {
+	if(req.body.id === conf.id) {
+		posts.findOne({'date': parseInt(req.body.date)}, function(err, post) {
+			if(err) return console.log(err);
+			if(post) {
+				posts.save({_id: post.id, body: req.body.body, raw: req.body.raw}, {w: 1}, function(err, post) {
+					if(err) return console.log(err);
+					res.json({success: true})
+				})
+			} else {
+				res.json({success: false})
+			}
+		})
+	}
 })
 
 app.post('/api/auth', function(req, res) {
