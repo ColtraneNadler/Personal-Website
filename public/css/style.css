@@ -38,6 +38,7 @@ header {
 	height: 500px;
 	min-height: 400px;
 	background: url("../imgs/banksy.png");
+	background-attachment: fixed; 
 	background-size: 100%;
 	overflow: hidden;
 }

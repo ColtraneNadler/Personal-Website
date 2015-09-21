@@ -19,14 +19,6 @@ mongo.connect(conf.db, function(err, db) {
 	global.posts = db.collection('post');
 })
 
-//mysql
-// var connection = mysql.createConnection({
-//   host     : conf.db.host,
-//   user     : conf.db.user,
-//   password : conf.db.pass,
-//   database : conf.db.db
-// });
-
 //mail setup
 var transporter = nodemailer.createTransport({
     service: 'Gmail',
@@ -35,11 +27,6 @@ var transporter = nodemailer.createTransport({
         pass: conf.pass
     }
 });
-
-// connection.connect(function(err) {
-// 	if(err) return console.log(err);
-// 	console.log('Connected to mysql')
-// });
 
 app.get('/', function(req, res) {
 	res.sendFile(__dirname + '/index.html')
@@ -55,7 +42,6 @@ app.get('/api/posts', function(req, res) {
 	posts.find({}, options).toArray(function(err, postlist) {
 		if(err) return console.log(err);
 		posts.find().count(function(err, num) {
-			console.log(num)
 			if(req.query.num) {
 				if(3 * (req.query.num - 1) <= num) {
 					res.json({posts: postlist, next: false})
@@ -64,7 +50,6 @@ app.get('/api/posts', function(req, res) {
 				}
 			} else {
 				if(num > 3) {
-					console.log('ok')
 					res.json({posts: postlist, next: true})
 				} else {
 					res.json({posts: postlist, next: false})
@@ -75,7 +60,6 @@ app.get('/api/posts', function(req, res) {
 })
 
 app.get('/api/post', function(req, res) {
-	console.log(req.query.post)
 	posts.findOne({'date': parseInt(req.query.post)}, function(err, post) {
 		if(err) return console.log(err);
 		if(post) {
@@ -117,7 +101,6 @@ var timed = {}
 //mail
 app.post('/', function(req, res) {
 	var body = req.body;
-	console.log(body)
 	if(!timed[req._remoteAddress]) {
 		timed[req._remoteAddress] = Date.now() + 60;
 		setTimeout(function() {
@@ -144,10 +127,8 @@ app.post('/', function(req, res) {
 
 app.post('/api/newpost', function(req, res) {
 	req.body.date = Date.now();
-	console.log(req.body);
 	posts.insert(req.body, function(err, info) {
 		if(err) return console.log(err);
-		console.log(info)
 		res.json('successful')
 	})
 })
@@ -169,7 +150,6 @@ app.post('/api/post/update', function(req, res) {
 })
 
 app.post('/api/auth', function(req, res) {
-	console.log(req.body)
 	if(req.body.username === conf.username && req.body.password === conf.password) {
 		res.json({success: true, id: conf.id});
 	} else {
