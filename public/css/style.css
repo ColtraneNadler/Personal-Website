@@ -1,6 +1,6 @@
 /*
 * ==================================
-*    horrorpenguin css
+*    coltrane nadler © 2015
 * ==================================
 */
 
@@ -17,6 +17,13 @@
 
 textarea {
 	resize: vertical;
+}
+
+@keyframes bounceInDown {
+	0% { top: -1000px; }
+	70% { top: 25px; }
+	85% { top: -10px; }
+	100% { top: 0px; }
 }
 
 /*
@@ -52,6 +59,7 @@ header {
 .header-info {
 	margin-top: 110px;
 	position: relative;
+	animation: bounceInDown 1s;
 }
 
 .header-info img {
