@@ -1,3 +1,7 @@
+// ==========================
+// 	 coltrane nadler © 2015
+// ==========================
+
 var coltrane = angular.module('coltrane', ['ngRoute']);
 
 coltrane.config(function($routeProvider) {
@@ -66,7 +70,7 @@ coltrane.controller('home', function($scope, $http, $timeout) {
 
 		$http.post('/', obj).
 			then(function(data) {
-				$scope.contact_name = ''
+				$scope.contact_name = '';
 				$scope.contact_email = '';
 				$scope.contact_subject = '';
 				$scope.contact_message = '';
@@ -185,7 +189,6 @@ coltrane.controller('blogpost', function($scope, $http, $routeParams, $rootScope
 
 	$http.get('/api/post?post=' + $routeParams['post']).
 		then(function(data) {
-			console.log(data)
 			$scope.post = data.data;
 			$scope.preview = data.data.body;
 			$scope.editor = data.data.raw;
