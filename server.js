@@ -43,7 +43,7 @@ app.get('/api/posts', function(req, res) {
 		if(err) return console.log(err);
 		posts.find().count(function(err, num) {
 			if(req.query.num) {
-				if(3 * (req.query.num - 1) <= num) {
+				if(3 * req.query.num >= num) {
 					res.json({posts: postlist, next: false})
 				} else {
 					res.json({posts: postlist, next: true})
@@ -138,7 +138,10 @@ app.post('/api/post/update', function(req, res) {
 		posts.findOne({'date': parseInt(req.body.date)}, function(err, post) {
 			if(err) return console.log(err);
 			if(post) {
-				posts.save({_id: post.id, body: req.body.body, raw: req.body.raw}, {w: 1}, function(err, post) {
+				post.body = req.body.body;
+				post.raw = req.body.raw;
+
+				posts.save(post, {w: 1}, function(err, post) {
 					if(err) return console.log(err);
 					res.json({success: true})
 				})

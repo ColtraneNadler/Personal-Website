@@ -181,7 +181,9 @@ coltrane.controller('blogpost', function($scope, $http, $routeParams, $rootScope
 
 		$http.post('/api/post/update', obj).
 			then(function(data) {
-				console.log(data)
+				$scope.post.body = marked($scope.editor);
+				$scope.post.raw = $scope.editor;
+				$scope.edit = false;
 			}, function(err) {
 				return console.log(err);
 			})
