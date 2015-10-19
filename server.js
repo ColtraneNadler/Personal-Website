@@ -1,3 +1,15 @@
+//
+	// * FEEL FREE TO USE ALL THE CODE ON HERE HOWEVER YOU WANT! 
+	// * ALL THE CODE IS OPEN SOURCE, AND IS VIEWABLE ON GITHUB
+	// * BY CLICKING THE 'FORK ME ON GITHUB' BUTTON ON THE TOP 
+	// * RIGHT OF THIS PAGE! 
+	// * 
+	// * KANYE WEST 2020
+	// *
+	// * Coltrane Nadler © 2015
+//
+
+
 var express 		= require('express')
 	, app 			= express()
 	, bodyParser 	= require('body-parser')
