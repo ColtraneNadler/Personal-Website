@@ -1,6 +1,14 @@
-// ==========================
-// 	 coltrane nadler © 2015
-// ==========================
+//
+//  * FEEL FREE TO USE ALL THE CODE ON HERE HOWEVER YOU WANT! 
+// 	* ALL THE CODE IS OPEN SOURCE, AND IS VIEWABLE ON GITHUB
+// 	* BY CLICKING THE 'FORK ME ON GITHUB' BUTTON ON THE TOP 
+// 	* RIGHT OF THIS PAGE! 
+// 	* 
+// 	* KANYE WEST 2020
+// 	*
+// 	* Coltrane Nadler © 2015
+//
+
 
 var coltrane = angular.module('coltrane', ['ngRoute']);
 
@@ -31,6 +39,14 @@ coltrane.config(function($routeProvider) {
 		})
 })
 
+coltrane.factory('$page', function(){
+  var title = 'Coltrane Nadler // Home';
+  return {
+    title: function() { return title; },
+    setTitle: function(newTitle) { title = newTitle; }
+  };
+});
+
 coltrane.directive('bindHtmlUnsafe', function( $compile ) {
     return function( $scope, $element, $attrs ) {
 
@@ -51,7 +67,13 @@ coltrane.directive('bindHtmlUnsafe', function( $compile ) {
     };
 });
 
-coltrane.controller('home', function($scope, $http, $timeout) {
+coltrane.controller('wrap', function($scope, $page) {
+	$scope.Page = $page;
+})
+
+coltrane.controller('home', function($scope, $http, $timeout, $page) {
+	$page.setTitle('Coltrane Nadler // Home')
+
 	$scope.contact_name = '';
 	$scope.contact_email = '';
 	$scope.contact_subject = '';
@@ -95,7 +117,9 @@ coltrane.controller('home', function($scope, $http, $timeout) {
 	}
 })
 
-coltrane.controller('blog', function($scope, $http) {
+coltrane.controller('blog', function($scope, $http, $page) {
+	$page.setTitle('Coltrane Nadler // Blog')
+
 	$scope.posts = false;
 	$scope.next = 2;
 	$scope.convertTime = function(unix) {
@@ -111,7 +135,9 @@ coltrane.controller('blog', function($scope, $http) {
 		})
 })
 
-coltrane.controller('blogpag', function($scope, $http, $routeParams) {
+coltrane.controller('blogpag', function($scope, $http, $routeParams, $page) {
+	$page.setTitle('Coltrane Nadler // Blog')
+
 	$scope.posts = [];
 	$scope.convertTime = function(unix) {
 		return new Date(unix).toString().split(' ').slice(1,4).join(' ');
@@ -133,7 +159,9 @@ coltrane.controller('blogpag', function($scope, $http, $routeParams) {
 		})
 })
 
-coltrane.controller('blogpost', function($scope, $http, $routeParams, $rootScope, $location) {
+coltrane.controller('blogpost', function($scope, $http, $routeParams, $rootScope, $location, $page) {
+	$page.setTitle('Coltrane Nadler // Blog')
+
 	$scope.post = {};
 	$scope.admin = $rootScope.auth;
 	$scope.edit = false;
@@ -192,6 +220,7 @@ coltrane.controller('blogpost', function($scope, $http, $routeParams, $rootScope
 	$http.get('/api/post?post=' + $routeParams['post']).
 		then(function(data) {
 			$scope.post = data.data;
+			$scope.post.date = new Date($scope.post.date).toString().split(' ').slice(1,4).join(' ');
 			$scope.preview = data.data.body;
 			$scope.editor = data.data.raw;
 		}, function(err) {
@@ -199,7 +228,9 @@ coltrane.controller('blogpost', function($scope, $http, $routeParams, $rootScope
 		})
 })
 
-coltrane.controller('admin', function($scope, $http, $rootScope) {
+coltrane.controller('admin', function($scope, $http, $rootScope, $page) {
+	$page.setTitle('Coltrane Nadler // Admin')
+
 	$scope.auth = $rootScope.auth || null;
 
 	$scope.body = '';
