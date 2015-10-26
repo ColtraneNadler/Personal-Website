@@ -41,9 +41,11 @@ coltrane.config(function($routeProvider) {
 
 coltrane.factory('$page', function(){
   var title = 'Coltrane Nadler // Home';
+  var showT = false;
   return {
+  	// showT = true;
     title: function() { return title; },
-    setTitle: function(newTitle) { title = newTitle; }
+    setTitle: function(newTitle) { title = newTitle; showT = true; }
   };
 });
 

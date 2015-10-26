@@ -13,7 +13,7 @@
 				<div bind-html-unsafe="post.body" ng-if="!edit" class="yerp"></div>
 				<textarea class="form-control" ng-show="edit" ng-model="editor"></textarea>
 				<br>
-				<div class="panel panel-default" ng-show="edit">
+				<div class="panel panel-default yerp" ng-show="edit">
 					<div class="panel-body" bind-html-unsafe="updateprev()" class="yerp"></div>
 				</div>
 				<button class="btn btn-default" ng-click="updatepost()" ng-if="edit">Update</button>
@@ -21,9 +21,3 @@
 		</div>
 	</div>
 </div>
-
-<style>
-	.yerp ul {
-		margin-left: 20px;
-	}
-</style>

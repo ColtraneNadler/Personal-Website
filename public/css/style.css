@@ -64,7 +64,15 @@ header {
 .header-info {
 	margin-top: 110px;
 	position: relative;
+}
+
+.hide {
+	display: none;
+}
+
+.header-info-show {
 	animation: bounceInDown 1s;
+	display: static;
 }
 
 .header-info img {
@@ -230,6 +238,29 @@ textarea {
 .blog-post h3 .btn {
 	float: right;
 	margin-left: 5px;
+}
+
+
+/*
+* ============================================
+*		#. yerp
+* ============================================
+*/
+
+.yerp {
+	ul {
+		margin-left: 10px;
+	}
+
+	img {
+		max-width: 90%;
+		margin: auto;
+	}
+
+	iframe {
+		max-width: 90%;
+		margin: auto;
+	}
 }
 
 /*

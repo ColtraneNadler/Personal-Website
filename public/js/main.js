@@ -18,6 +18,10 @@
 
 $(function() {
 
+		// wait for the dom to load before doing the animation
+		$('.header-info').addClass('header-info-show');
+		$('.header-info').removeClass('hide');
+
 		var header = $('.header-overlay');
 		var iScrollInstance;
 
