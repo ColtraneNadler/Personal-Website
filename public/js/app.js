@@ -9,6 +9,13 @@
 // 	* Coltrane Nadler © 2015
 //
 
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-69338700-1', 'auto');
+ga('send', 'pageview');
 
 var coltrane = angular.module('coltrane', ['ngRoute']);
 
@@ -74,6 +81,9 @@ coltrane.controller('wrap', function($scope, $page) {
 })
 
 coltrane.controller('home', function($scope, $http, $timeout, $page) {
+
+	ga('set', 'page', '/home');
+
 	$page.setTitle('Coltrane Nadler // Home')
 
 	$scope.contact_name = '';
@@ -120,6 +130,9 @@ coltrane.controller('home', function($scope, $http, $timeout, $page) {
 })
 
 coltrane.controller('blog', function($scope, $http, $page) {
+
+	ga('set', 'page', '/blog');
+
 	$page.setTitle('Coltrane Nadler // Blog')
 
 	$scope.posts = false;
@@ -138,6 +151,9 @@ coltrane.controller('blog', function($scope, $http, $page) {
 })
 
 coltrane.controller('blogpag', function($scope, $http, $routeParams, $page) {
+
+	ga('set', 'page', '/blog/' + $routeParams['num']);
+
 	$page.setTitle('Coltrane Nadler // Blog')
 
 	$scope.posts = [];
@@ -162,6 +178,9 @@ coltrane.controller('blogpag', function($scope, $http, $routeParams, $page) {
 })
 
 coltrane.controller('blogpost', function($scope, $http, $routeParams, $rootScope, $location, $page) {
+
+	ga('set', 'page', '/blog/' + $routeParams['post']);
+
 	$page.setTitle('Coltrane Nadler // Blog')
 
 	$scope.post = {};
@@ -231,6 +250,9 @@ coltrane.controller('blogpost', function($scope, $http, $routeParams, $rootScope
 })
 
 coltrane.controller('admin', function($scope, $http, $rootScope, $page) {
+
+	ga('set', 'page', '/admin');
+
 	$page.setTitle('Coltrane Nadler // Admin')
 
 	$scope.auth = $rootScope.auth || null;
