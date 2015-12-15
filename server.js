@@ -25,10 +25,12 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use(express.static(__dirname + '/public'))
 
 //mongo
+var posts;
+
 mongo.connect(conf.db, function(err, db) {
 	if(err) return console.log(err);
 	console.log('Connected to Mongo')
-	global.posts = db.collection('post');
+	posts = db.collection('post');
 })
 
 //mail setup

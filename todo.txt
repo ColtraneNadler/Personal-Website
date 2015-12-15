@@ -1,3 +1,0 @@
-[1] Finish updating post functionality
-[2] Make it update the blogpost page after you update it (with the new post marked up)
-[3] Make email alert message more customizable
